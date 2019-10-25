@@ -1,0 +1,38 @@
+<style>
+    body {
+        background-color: #000;
+        color: red;
+    }
+
+    table {
+        border: 1px solid red;
+    }
+
+    th, td {
+        border: 1px solid lime;
+        text-align: center;
+    }
+
+    a { 
+        position: relative;
+        right: 100px;
+        bottom: 20px;
+        color: blue;
+        text-decoration: none;
+        float: right;
+    }
+</style>
+
+<a href="/ideas">Bright Ideas</a>
+
+Name: <%= @user.name %>
+<br>
+Alias: <%= @user.alias %>
+<br>
+Email: <%= @user.email %>
+<br>
+<hr>
+<br>
+Total Number of Posts: <%= @user.ideas.count %>
+<br>
+Total Number of Likes: <%= @user.ideasLiked.count %>

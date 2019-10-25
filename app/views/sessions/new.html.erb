@@ -1,0 +1,98 @@
+<style>
+    body {
+        background-color: #000;
+    }
+
+    h1, span {
+        color: red;
+    }
+
+    h1, form, .field, input[type=submit], .nameInEmIn, #passIn {
+        position: relative;
+    }
+
+    #header {
+        text-align: center;
+    }
+
+    #loginForm {
+        left: 945px;
+        bottom: 215px;
+    }
+
+    #registerForm {
+        left: 45px;
+    }
+
+    .field {
+        left: 24px;
+    }
+
+    #loginSubmit, #registerSubmit {
+        background-color: red;
+        color: orange;
+        border-radius: 5px;
+    }
+
+    #loginSubmit {
+        left: 125px;
+    }
+
+    #registerSubmit {
+        top: 42px;
+        right: 118px;
+    }
+
+    input {
+        background-color: red;
+    }
+
+    #login {
+        left: 1047px;
+        bottom: 215px;
+    }
+
+    #register {
+        left: 140px;
+    }
+
+    .nameInEmIn {
+        left: 82px;
+    }
+
+    #passIn {
+        left: 59px;
+    }
+</style>
+
+<h1 id="header">Ideas</h1>
+<h1 id="register">Register</h1>
+<form action='/users/new' method="post" id="registerForm">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <span>Name:</span> <input type="text" name="user[name]" class="nameInEmIn">
+    <br>
+    <br>
+    <span>Alias:</span> <input type="text" name="user[alias]" class="nameInEmIn">
+    <br>
+    <br>
+    <span>Email:</span> <input type="text" name="user[email]" class="nameInEmIn">
+    <br>
+    <br>
+    <span>Password:</span> <input type="password" name="user[password]" id="passIn">
+    <br>
+    <br>
+    <span>Confirm Password:</span> <input type="password" name="user[password_confirmation]">
+    <input type="submit" value="Log In" id="registerSubmit">
+</form>
+
+<h1 id="login">Log In</h1>
+<form action='/users/login' method="post" id="loginForm">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <span>Email:</span> <input type="text" name="login[email]" class="field">
+    <br>
+    <br>
+    <span>Password:</span> <input type="password" name="login[password]">
+    <br>
+    <br>
+    <input type="submit" value="Log In" id="loginSubmit">
+</form>

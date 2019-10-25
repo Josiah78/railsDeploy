@@ -1,0 +1,61 @@
+<style>
+    body {
+        background-color: #000;
+        color: red;
+    }
+
+    table {
+        width: 420px;
+        height: 200px;
+        border: 1px solid red;
+        text-align: center;
+    }
+
+    th, td {
+        border: 1px solid lime;
+    }
+
+    a {
+        color: blue;
+        text-decoration: none;
+    }
+
+    #home {
+        position: relative;
+        right: 100px;
+        bottom: 20px;
+        float: right;
+    }
+
+    div {
+        display: inline-block;
+        width: 400px;
+        height: 100px;
+        border: 1px solid red;
+        text-align: center;
+    }
+</style>
+
+<a href="/ideas" id="home">Bright Ideas</a>
+
+<%= @idea.user.alias %> says:
+<div>
+    <%= @idea.content %>
+</div>
+<br>
+<br>
+<h3>People who liked this post:</h3>
+<table>
+    <tr>
+        <th>Alias</th>
+        <th>Name</th>
+    </tr>
+    <% @users.each do |user| %>
+        <% if Like.find_by_idea_id_and_user_id(@idea.id, user.id) %>
+        <tr>
+            <td><a href="/users/<%= user.id %>"><%= user.alias %></a></td>
+            <td><%= user.name %></td>
+        </tr>
+        <% end %>
+    <% end %>
+</table>

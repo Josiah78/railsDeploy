@@ -1,0 +1,75 @@
+<style>
+    body {
+        background-color: #000;
+        color: red;
+    }
+
+    table {
+        border: 1px solid red;
+    }
+
+    th, td {
+        border: 1px solid lime;
+        text-align: center;
+    }
+
+    a {
+        color: blue;
+        text-decoration: none;
+    }
+
+    div {
+        display: inline-block;
+        width: 400px;
+        height: 100px;
+        border: 1px solid red;
+        text-align: center;
+    }
+
+    #addButton {
+        position: relative;
+        left: 95px;
+        top: 10px;
+    }
+
+    p {
+        position: relative;
+        left: 174px;
+        bottom: 23px;
+    }
+
+    #createForm {
+        position: relative;
+        left: 100px;
+    }
+    #ideaInput {
+        width: 300px;
+    }
+</style>
+
+<h2>Hi, <%= @user.alias %>!</h2>
+
+<form action="/createidea" method="POST" id="createForm">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="text" name="idea[content]" placeholder="Post something witty here..." id="ideaInput">
+    <input type="submit" value="Idea!">
+</form>
+<br>
+<br>
+<% @ideas.each do |idea| %>
+    <a href="/users/<%= idea.user_id %>"><%= idea.user.alias %></a> says:
+    <div>
+        <%= idea.content %>
+    </div>
+    <% if idea.user_id == current_user.id %>
+    <a href="/ideas/<%= idea.id %>" data-method="delete">Delete</a>
+    <% end %>
+    <% if not idea.usersWhoLiked.include?(current_user) %>
+        <form action="/add/<%= idea.id %>" method="POST">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"> 
+            <input type="submit" value="Like" id="addButton">
+        </form>
+    <% end %>
+    <p><a href="/ideas/<%= idea.id %>"><%= Like.where(idea: idea).count %> people</a> like this.</p>
+    <br>
+<% end %>
